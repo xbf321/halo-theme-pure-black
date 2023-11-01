@@ -1,0 +1,8 @@
+<div class="mb-3 p-3 rounded border border-gray-light bg-pure-black-200">
+  <h2 class="font-bold text-lg mb-2">分类目录</h2>
+  <ul th:with="categories = ${categoryFinder.listAsTree()}">
+    <div
+      th:replace="~{modules/category-tree :: single(categories=${categories})}"
+    ></div>
+  </ul>
+</div>

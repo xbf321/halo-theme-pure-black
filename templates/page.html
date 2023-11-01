@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html
+  xmlns:th="https://www.thymeleaf.org"
+  th:replace="modules/layout :: html(title = ${singlePage.spec.title} + ' - ' + ${site.title}, head=null, banner=~{::banner}, sidebar=null, content=~{::content}, footer = null)"
+>
+  <th:block th:fragment="banner">
+    <div class="mt-2 flex flex-column">
+      <h1
+        class="flex-1 text-3xl font-bold"
+        th:text="${singlePage.spec.title}"
+      />
+      <a
+        sec:authorize="isAuthenticated()"
+        th:href="|/console/single-pages/editor?name=${singlePage.metadata.name}&returnToView=true|"
+        class="button mt-1"
+      >
+        编辑
+      </a>
+    </div>
+    <div class="mt-1 pb-2 border-b border-gray-light text-xs text-gray-600">
+      <span
+        th:text="|发布于 ${#dates.format(singlePage.spec.publishTime,'yyyy-MM-dd')}|"
+      ></span>
+      <span class="text-gray-600">/</span>
+      <span
+        th:text="|更新于 ${#dates.format(singlePage.status.lastModifyTime,'yyyy-MM-dd')}|"
+      ></span>
+      <span class="text-gray-600">/</span>
+      <span th:text="|${singlePage.stats?.visit ?:0} 阅读|"></span>
+      <span class="text-gray-600">/</span>
+      <span th:text="|${singlePage.stats?.comment ?:0} 评论|"> </span>
+    </div>
+  </th:block>
+  <th:block th:fragment="content">
+    <div class="mt-2 post-content" th:utext="${singlePage.content.content}" />
+    <hr th:if="${haloCommentEnabled}" class="my-4 border-b border-gray-light" />
+    <div th:if="${haloCommentEnabled}">
+      <h2 class="mb-2 text-base">
+        评论
+      </h2>
+      <halo:comment
+        group="content.halo.run"
+        kind="SinglePage"
+        th:attr="name=${singlePage.metadata.name}"
+      />
+    </div>
+  </th:block>
+</html>

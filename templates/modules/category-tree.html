@@ -1,0 +1,23 @@
+<ul th:fragment="next (categories)" class="ml-3 space-y-1 border-l pl-2">
+  <li th:fragment="single (categories)" th:each="category : ${categories}">
+    <div class="flex mb-2">
+      <div class="flex-1">
+        <a
+          th:href="@{${category.status.permalink}}"
+          th:title="${category.spec.displayName}"
+          class="hover:text-blue-500 hover:underline"
+          th:text="${category.spec.displayName}"
+        />
+      </div>
+      <div>
+        <span
+          class="inline-block rounded text-center px-1 bg-pure-black-300"
+          th:text="${category.status.visiblePostCount}"
+        />
+      </div>
+    </div>
+    <th:block th:if="${not #lists.isEmpty(category.children)}">
+      <th:block th:replace="~{modules/category-tree :: next (categories=${category.children})}"></th:block>
+    </th:block>
+  </li>
+</ul>

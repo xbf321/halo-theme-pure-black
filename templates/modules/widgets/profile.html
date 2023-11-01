@@ -1,0 +1,67 @@
+<div
+  class="mb-3 p-3 rounded border border-gray-light bg-pure-black-200"
+  th:with="stats = ${siteStatsFinder.getStats()}"
+>
+  <div class="flex flex-col items-center justify-center gap-4">
+    <div
+      th:if="${not #strings.isEmpty(theme.config.sidebar.profile.logo)}"
+      class="relative h-24 w-24"
+    >
+      <img
+        th:src="${theme.config.sidebar.profile.logo}"
+        th:alt="${site.title}"
+        class="h-full w-full rounded-full"
+      />
+    </div>
+    <div>
+      <h1
+        class="text-2xl font-medium"
+        th:text="${site.title}"
+      ></h1>
+    </div>
+    <div th:if="${not #strings.isEmpty(site.subtitle)}">
+      <p
+        class="text-center text-sm"
+        th:text="${site.subtitle}"
+      ></p>
+    </div>
+    <div class="grid grid-cols-4 gap-5">
+      <div class="inline-flex flex-col items-center">
+        <span
+          class="text-xl font-medium tabular-nums"
+          th:text="${stats.post}"
+        ></span>
+        <span class="text-xs font-light"
+          >文章数</span
+        >
+      </div>
+      <div class="inline-flex flex-col items-center">
+        <span
+          class="text-xl font-medium tabular-nums"
+          th:text="${stats.category}"
+        ></span>
+        <span class="text-xs font-light"
+          >分类数</span
+        >
+      </div>
+      <div class="inline-flex flex-col items-center">
+        <span
+          class="text-xl font-medium tabular-nums"
+          th:text="${stats.comment}"
+        ></span>
+        <span class="text-xs font-light"
+          >评论数</span
+        >
+      </div>
+      <div class="inline-flex flex-col items-center">
+        <span
+          class="text-xl font-medium tabular-nums"
+          th:text="${stats.visit}"
+        ></span
+        ><span class="text-xs font-light"
+          >访问量</span
+        >
+      </div>
+    </div>
+  </div>
+</div>

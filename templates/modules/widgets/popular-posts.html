@@ -1,0 +1,19 @@
+<div class="mb-3 p-3 rounded border border-gray-light bg-pure-black-200 popular-post" th:with="posts = ${postFinder.list(1,10)}">
+  <h2 class="font-bold text-lg mb-2">热门文章</h2>
+  <div class="mb-1 pb-2 border-b border-gray-light popular-post__item" th:each="post : ${posts}">
+    <h3 class="mb-1">
+      <a
+        class="hover:text-blue-500 hover:underline"
+        th:text="${post.spec.title}"
+        th:href="@{${post.status.permalink}}"
+        th:title="${post.spec.title}"
+      ></a>
+    </h3>
+    <div class="text-xs text-gray-600">
+      <span
+        th:text="${#dates.format(post.spec.publishTime,'yyyy-MM-dd')+' 发布'}"
+      ></span>
+      <span class="mx-1">/</span><span th:text="${post.stats.visit + '浏览'}"></span>
+    </div>
+  </div>
+</div>

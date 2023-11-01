@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html
+  xmlns:th="https://www.thymeleaf.org"
+  th:replace="~{modules/layout :: html(title = '标签 - ' + ${site.title}, head = null, banner = ~{::banner}, sidebar=null, content = ~{::content}, footer = null)}"
+>
+  <th:block th:fragment="banner">
+    <th:block th:replace="~{modules/tag-filter}" />
+  </th:block>
+  <th:block th:fragment="content">
+    <th:block th:with="tag = ${tagFinder.list(1,1).items[0]}">
+      <th:block
+        th:if="${tag}"
+        th:with="posts = ${postFinder.listByTag(1,10,tag.metadata.name)}"
+      >
+        <th:block th:each="post : ${posts.items}">
+          <th:block th:replace="~{modules/post-card :: post-card(${post})}" />
+        </th:block>
+
+        <div
+          th:if="${posts.total == 0}"
+          class="mt-6 flex items-center justify-center"
+        >
+          <span class="text-sm font-light text-white">此标签下没有文章</span>
+        </div>
+
+        <div th:if="${posts.total gt 10}" class="mt-10 flex justify-end">
+          <a
+            class="cursor-pointer text-blue-500 hover:text-blue-500 hover:underline"
+            th:href="@{${tag.status.permalink}}"
+          >
+            更多文章
+          </a>
+        </div>
+      </th:block>
+    </th:block>
+  </th:block>
+</html>

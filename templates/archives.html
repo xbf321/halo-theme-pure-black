@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html
+  xmlns:th="https://www.thymeleaf.org"
+  th:replace="~{modules/layout :: html(title = '归档 - ' + ${site.title}, head = null, banner = ~{::banner}, sidebar=null,content = ~{::content}, footer = null)}"
+>
+  <th:block th:fragment="banner">
+    <h2 class="font-bold text-3xl border-b border-gray-light pb-2">归档</h2>
+  </th:block>
+  <th:block th:fragment="content">
+    <div class="flex flex-col gap-1">
+      <th:block th:each="archive : ${archives.items}">
+        <th:block th:each="month : ${archive.months}">
+          <div class="grid grid-cols-12 gap-3">
+            <div class="col-span-12 sm:col-span-3">
+              <h2
+                class="sticky font-bold text-lg"
+                th:text="|${archive.year} 年 ${month.month} 月|"
+              ></h2>
+            </div>
+            <div class="col-span-12 sm:col-span-9">
+              <th:block th:each="post : ${month.posts}">
+                <div
+                  class="block rounded border border-gray-light p-3 mb-3 bg-pure-black-200 flex flex-col gap-2"
+                >
+                  <div
+                    class="flex min-w-0 flex-wrap items-center justify-between gap-3"
+                  >
+                    <h1
+                      class="flex-1 col-span-7 flex flex-nowrap truncate"
+                    >
+                      <a
+                        class="text-2xl font-bold my-2 hover:text-blue-500 hover:underline"
+                        th:href="@{${post.status.permalink}}"
+                        th:title="${post.spec.title}"
+                        th:text="${post.spec.title}"
+                      />
+                    </h1>
+                    <div class="col-span-3 col-start-11">
+                      <p
+                        class="truncate"
+                        th:text="${#dates.format(post.spec.publishTime, 'yyyy-MM-dd')}"
+                      ></p>
+                    </div>
+                  </div>
+                  <div
+                    th:if="${not #lists.isEmpty(post.categories)} or ${not #lists.isEmpty(post.tags)}"
+                    class="flex flex-wrap items-center gap-2"
+                  >
+                    <a
+                      th:if="${#lists.size(post.categories)} gt 0"
+                      th:href="@{${post.categories[0].status.permalink}}"
+                      th:title="${post.categories[0].spec.displayName}"
+                      th:text="${post.categories[0].spec.displayName}"
+                      class="mr-1 hover:text-blue-500 hover:underline"
+                    >
+                    </a>
+                    <a
+                      th:each="tag : ${post.tags}"
+                      th:href="@{${tag.status.permalink}}"
+                      th:title="${tag.spec.displayName}"
+                      th:text="|#${tag.spec.displayName}|"
+                      class="cursor-pointer italic hover:text-blue-500 hover:underline"
+                    >
+                    </a>
+                  </div>
+                  <p
+                    class="post-description rounded-1 p-3 leading-6"
+                    th:text="${post.status.excerpt}"
+                  />
+                </div>
+              </th:block>
+            </div>
+          </div>
+        </th:block>
+      </th:block>
+    </div>
+    <div
+      th:if="${archives.total == 0}"
+      class="mt-6 flex items-center justify-center"
+    >
+      <span class="text-sm font-light text-white">当前没有文章</span>
+    </div>
+    <div
+      class="flex items-center justify-between"
+      th:if="${archives.hasPrevious() || archives.hasNext()}"
+    >
+      <a th:href="@{${archives.prevUrl}}" class="button text-base px-4">
+        上一页
+      </a>
+      <span th:text="|${archives.page} / ${archives.totalPages}|"></span>
+      <a th:href="@{${archives.nextUrl}}" class="button text-base px-4">
+        下一页
+      </a>
+    </div>
+  </th:block>
+</html>

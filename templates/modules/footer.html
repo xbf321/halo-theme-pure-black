@@ -1,0 +1,45 @@
+<footer class="text-xs my-3 text-gray-700">
+  <span
+    class="block"
+    th:if="${not #strings.isEmpty(theme.config.footer.title)}"
+    th:text="${theme.config.footer.title}"
+  >
+  </span>
+  <span
+    class="block"
+    th:if="${not #strings.isEmpty(theme.config.footer.slogan)}"
+    th:text="${theme.config.footer.slogan}"
+  >
+  </span>
+  <span class="block">
+    ©
+    <th:block
+      th:text="${#dates.format(new java.util.Date().getTime(), 'yyyy')}"
+    />
+    <a
+      href="/"
+      class="hover:text-blue-500 hover:underline"
+      th:text="${site.title}"
+    ></a
+    >. All Rights Reserved. Powered by
+    <a
+      href="https://halo.run"
+      class="hover:text-blue-500 hover:underline"
+      target="_blank"
+      >Halo</a
+    >. Theme by
+    <a
+      href="https://github.com/xbf321/halo-theme-github"
+      class="hover:text-blue-500 hover:underline"
+      target="_blank"
+      >PureBlack</a
+    >.
+    <a
+      href="https://beian.miit.gov.cn/"
+      class="hover:text-blue-500 hover:underline"
+      target="_blank"
+      th:href="${theme.config.beian.icp_link}"
+      th:text="${theme.config.beian.icp_text}"
+    />
+  </span>
+</footer>

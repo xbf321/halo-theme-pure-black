@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html
+  xmlns:th="https://www.thymeleaf.org"
+  th:replace="modules/layout :: html(title =  ${post.spec.title} + ' - ' + ${site.title}, head = null, banner = ~{::banner}, sidebar=~{::sidebar}, content = ~{::content}, footer = ~{::footer})"
+>
+  <th:block th:fragment="banner">
+    <div class="mt-2 flex flex-column">
+      <h1 class="flex-1 text-3xl font-bold" th:text="${post.spec.title}" />
+      <a
+        sec:authorize="isAuthenticated()"
+        th:href="|/console/posts/editor?name=${post.metadata.name}&returnToView=true|"
+        class="button mt-1"
+      >
+        编辑
+      </a>
+    </div>
+    <div class="mt-1 pb-2 border-b border-gray-light text-xs text-gray-600">
+      <span
+        th:text="|发布于 ${#dates.format(post.spec.publishTime,'yyyy-MM-dd')}|"
+      ></span>
+      <span class="text-gray-600">/</span>
+      <span
+        th:text="|更新于 ${#dates.format(post.status.lastModifyTime,'yyyy-MM-dd')}|"
+      ></span>
+      <span class="text-gray-600">/</span>
+      <span th:text="|${post.stats?.visit ?:0} 阅读|"></span>
+      <span class="text-gray-600">/</span>
+      <span th:text="|${post.stats?.comment ?:0} 评论|"> </span>
+    </div>
+  </th:block>
+
+  <th:block th:fragment="content">
+    <article id="content" class="mt-2 post-content overflow-hidden" th:utext="${post.content.content}" />
+    <div class="flex gap-2">
+      <a
+        th:each="tag : ${post.tags}"
+        th:href="@{${tag.status.permalink}}"
+        th:title="${tag.spec.displayName}"
+        th:text="|#${tag.spec.displayName}|"
+        class="cursor-pointer text-sm italic cursor-pointer inline-block text-blue-500 hover:underline"
+      >
+      </a>
+    </div>
+    <hr th:if="${haloCommentEnabled}" class="my-4 border-b border-gray-light" />
+    <div th:if="${haloCommentEnabled}">
+      <h2 class="mb-2 text-base font-medium text-white">评论</h2>
+      <halo:comment
+        group="content.halo.run"
+        kind="Post"
+        th:attr="name=${post.metadata.name}"
+      />
+    </div>
+  </th:block>
+  <th:block th:fragment="sidebar_prepend">
+    <div
+      class="toc-container sticky top-20 z-[5] w-full cursor-pointer mb-3 p-3 rounded border border-gray-light bg-pure-black-200"
+    >
+      <h2 class="font-bold text-lg mb-2">
+        目录
+      </h2>
+      <div class="toc max-h-64 overflow-auto"></div>
+    </div>
+  </th:block>
+  <th:block th:fragment="sidebar">
+    <th:block th:replace="~{modules/sidebar :: sidebar(prepend = ~{::sidebar_prepend})}"></th:block>
+  </th:block>
+  <th:block th:fragment="footer">
+    <script>
+      main.generateToc();
+    </script>
+  </th:block>
+</html>

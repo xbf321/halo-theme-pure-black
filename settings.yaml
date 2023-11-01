@@ -1,0 +1,63 @@
+apiVersion: v1alpha1
+kind: Setting
+metadata:
+  name: theme-pure-black-setting
+spec:
+  forms:
+    - group: footer
+      label: 页脚
+      formSchema:
+        - $formkit: text
+          name: title
+          label: 标题
+          help: 独占一行
+
+        - $formkit: textarea
+          rows: 3
+          name: slogan
+          id: slogan
+          key: slogan
+          label: 标语
+          help: 独占一行
+    - group: sidebar
+      label: 侧边栏
+      formSchema:
+        - $formkit: repeater
+          name: widgets
+          label: 小部件
+          value:
+            - value: popular-posts
+            - value: categories
+            - value: tags
+          children:
+            - $formkit: select
+              name: value
+              label: 部件
+              options:
+                - label: 站点资料
+                  value: profile
+                - label: 热门文章
+                  value: popular-posts
+                - label: 文章分类
+                  value: categories
+                - label: 文章标签
+                  value: tags
+
+        - $formkit: group
+          name: profile
+          value:
+            logo:
+          children:
+            - $formkit: attachment
+              name: logo
+              label: 站点资料 Logo
+    - group: beian
+      label: 备案设置
+      formSchema:
+        - $formkit: text
+          name: icp_text
+          label: ICP备案号
+        - $formkit: text
+          name: icp_link
+          label: ICP备案跳转链接
+          value: https://beian.miit.gov.cn/

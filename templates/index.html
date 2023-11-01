@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html
+  xmlns:th="https://www.thymeleaf.org"
+  th:replace="~{modules/layout :: html(title = ${site.title}, head = null, banner = null, sidebar=null, content = ~{::content}, footer = null)}"
+>
+  <th:block th:fragment="content">
+    <a
+      th:each="tag : ${tags}"
+      th:href="@{${tag.status.permalink}}"
+      th:title="${tag.spec.displayName}"
+      class="button"
+    >
+      <th:block th:text="|#${tag.spec.displayName}|" />
+      <sup th:text="${tag.status.visiblePostCount}"></sup>
+    </a>
+    <th:block th:replace="~{modules/category-filter}" />
+    <th:block th:each="post : ${posts.items}">
+      <th:block
+        th:replace="~{modules/post-card :: post-card(${post})}"
+      />
+    </th:block>
+    <div th:if="${posts.total == 0}" class="mt-6 flex items-center justify-center">
+      <span class="text-sm font-light text-white">当前没有文章</span>
+    </div>
+    <div class="flex items-center justify-between" th:if="${posts.hasPrevious() || posts.hasNext()}">
+      <a
+        th:href="@{${posts.prevUrl}}"
+        class="button text-base px-4"
+      >
+        上一页
+      </a>
+      <span th:text="|${posts.page} / ${posts.totalPages}|"></span>
+      <a
+        th:href="@{${posts.nextUrl}}"
+        class="button text-base px-4"
+      >
+        下一页
+      </a>
+    </div>
+  </th:block>
+</html>

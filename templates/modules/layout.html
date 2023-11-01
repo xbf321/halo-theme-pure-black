@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  th:fragment="html (title, head, banner, sidebar, content, footer)"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title th:text="${title}"></title>
+    <meta property="og:title" th:content="${title}">
+    <meta property="og:description" th:content="${site.seo.description}">
+    <link
+      rel="stylesheet"
+      th:href="@{/assets/dist/style.css?v={version}(version=${theme.spec.version})}"
+    />
+    <th:block th:if="${head != null}">
+      <th:block th:replace="${head}" />
+    </th:block>
+    <script
+      th:src="@{/assets/dist/main.iife.js?v={version}(version=${theme.spec.version})}"
+    ></script>
+  </head>
+  <body>
+    <th:block th:replace="~{modules/header}"></th:block>
+    <div class="container mx-auto py-3">
+      <th:block th:if="${banner != null}">
+        <th:block th:replace="${banner}"></th:block>
+      </th:block>
+      <div class="flex-justify-center flex gap-3 pt-3">
+        <div class="flex flex-auto flex-col overflow-x-hidden">
+          <div class="border-gray-light border-b pb-3">
+            <th:block th:replace="${content}"></th:block>
+          </div>
+          <th:block th:replace="~{modules/footer}"></th:block>
+        </div>
+        <th:block th:if="${sidebar != null}">
+          <th:block th:replace="${sidebar}"></th:block>
+        </th:block>
+        <th:block th:if="${sidebar == null}">
+          <th:block
+            th:replace="~{modules/sidebar :: sidebar(prepend = null)}"
+          ></th:block>
+        </th:block>
+      </div>
+    </div>
+    <th:block th:if="${footer != null}">
+      <th:block th:replace="${footer}"></th:block>
+    </th:block>
+    <halo:footer />
+  </body>
+</html>

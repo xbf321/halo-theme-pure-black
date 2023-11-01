@@ -1,0 +1,22 @@
+<div class="mb-3 p-3 rounded border border-gray-light bg-pure-black-200">
+  <div class="flex items-center justify-between">
+    <h2 class="font-bold text-lg">标签</h2>
+    <a
+      class="inline-flex items-center gap-2 transition-all hover:text-blue-500 hover:underline"
+      th:href="@{/tags}"
+    >
+      更多
+    </a>
+  </div>
+  <div class="mt-3 flex flex-wrap gap-3" th:with="tags = ${tagFinder.list(1,50)}">
+    <a
+      th:each="tag : ${tags}"
+      th:href="@{${tag.status.permalink}}"
+      th:title="${tag.spec.displayName}"
+      class="italic hover:text-blue-500 hover:underline"
+    >
+      <th:block th:text="|#${tag.spec.displayName}|"></th:block>
+      <sup th:text="${tag.status.visiblePostCount}"></sup>
+    </a>
+  </div>
+</div>
