@@ -2,6 +2,8 @@
 
 简单、纯黑色 Halo 主题，聚焦内容。
 
+DEMO地址：[https://xingbaifang.com/](https://xingbaifang.com/)
+
 ## 说明
 
 首次制作 halo 主题，如有问题，还请体谅。
