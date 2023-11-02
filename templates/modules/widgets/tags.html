@@ -13,7 +13,7 @@
       th:each="tag : ${tags}"
       th:href="@{${tag.status.permalink}}"
       th:title="${tag.spec.displayName}"
-      class="italic hover:text-blue-500 hover:underline"
+      class="italic text-base hover:text-blue-500 hover:underline"
     >
       <th:block th:text="|#${tag.spec.displayName}|"></th:block>
       <sup th:text="${tag.status.visiblePostCount}"></sup>

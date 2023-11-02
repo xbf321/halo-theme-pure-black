@@ -6,7 +6,7 @@
     <title th:text="${title}"></title>
     <meta property="og:title" th:content="${title}">
     <meta property="og:description" th:content="${site.seo.description}">
-    <style>html { background-color: rgb(13, 17, 23); color: rgb(230, 237, 243); }</style>
+    <style>html { background-color: rgb(13, 17, 23); color: rgb(230, 237, 243); } .hidden {display: none;}</style>
     <link rel="stylesheet" th:href="@{/assets/dist/style.css?v={version}(version=${theme.spec.version})}"/>
     <th:block th:if="${head != null}">
       <th:block th:replace="${head}" />

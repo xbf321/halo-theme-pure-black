@@ -22,3 +22,27 @@
 
 * 到 [Release](https://github.com/xbf321/halo-theme-pure-black/releases) 下载适用于 Halo 的主题版本。
 * 在 Console 端的主题菜单直接上传安装即可使用。
+
+## 开发
+
+### 设置同步的目标路径
+```js
+// 因为原代码目录和 halo 测试的主题目录，不在同一个目录，所以需要同步。
+export TARGET_DIR=dir
+
+```
+
+### Run
+
+```
+npm install
+npm run dev
+```
+
+### Build
+
+记得修改版本号。 ***package.json*** 和 ***settings.yaml***
+
+```js
+npm run build
+```

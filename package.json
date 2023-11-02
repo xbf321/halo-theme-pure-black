@@ -1,7 +1,7 @@
 {
   "name": "halo-theme-pure-black",
   "private": true,
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "A sample and pure black theme for Halo",
   "scripts": {
     "dev": "vite build --watch",
@@ -33,13 +33,14 @@
     "type": "git"
   },
   "devDependencies": {
-    "postcss": "^8.4.31",
-    "sass": "^1.69.3",
-    "tailwindcss": "^3.3.2",
-    "vite": "^4.3.9",
     "alpinejs": "^3.12.2",
     "autoprefixer": "^10.4.16",
     "lozad": "^1.16.0",
-    "tocbot": "^4.21.2"
+    "postcss": "^8.4.31",
+    "sass": "^1.69.3",
+    "tailwindcss": "^3.3.2",
+    "tocbot": "^4.21.2",
+    "vite": "^4.3.9",
+    "vite-plugin-static-copy": "^0.17.0"
   }
 }
