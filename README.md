@@ -2,15 +2,15 @@
 
 简单、纯黑色 Halo 主题，聚焦内容。
 
-DEMO地址：[https://xingbaifang.com/](https://xingbaifang.com/)
-
 ## 说明
 
-首次制作 halo 主题，如有问题，还请体谅。
+首次制作 halo 主题，难免会有意想不到的问题，相互指正，相互学习。
 
 配色来自 github。
 
-全局搜索功能需要先安装插件: [plugin-search-widget](https://github.com/halo-sigs/plugin-search-widget)
+- [x] 支持图片懒加载。
+- [x] 支持全局搜索 [plugin-search-widget](https://github.com/halo-sigs/plugin-search-widget)。
+- [x] 支持评论 [plugin-comment-widget](https://github.com/halo-dev/plugin-comment-widget)。
 
 
 ## 预览截图

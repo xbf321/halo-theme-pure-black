@@ -3,7 +3,6 @@ import { fileURLToPath } from "url";
 import path from "path";
 
 export default defineConfig({
-  plugins: [],
   build: {
     outDir: fileURLToPath(new URL("./templates/assets/dist", import.meta.url)),
     emptyOutDir: true,

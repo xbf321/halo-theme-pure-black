@@ -2,9 +2,25 @@
 @tailwind utilities;
 @tailwind components;
 
-html {
-  background-color: rgb(13, 17, 23);
-  color: rgb(230, 237, 243);
+html { 
+  background-color: rgb(13, 17, 23); 
+  color: rgb(230, 237, 243); 
+}
+
+:root {
+  --halo-search-widget-color-modal-layer: rgba(0, 0, 0, 0.9);
+  --halo-search-widget-color-modal-content-bg: rgb(33, 38, 45);
+  --halo-search-widget-color-form-input: #fff;
+  --halo-search-widget-color-form-input-placeholder: #fff;
+  --halo-search-widget-color-form-input-bg: rgb(13, 17, 23);
+  --halo-search-widget-color-form-divider: rgb(48, 54, 61);
+  --halo-search-widget-color-result-item-bg: rgb(22, 27, 34);
+  --halo-search-widget-color-result-item-hover-bg: rgba(0, 0, 0, 0.5);
+  --halo-search-widget-color-result-item-title: #fff;
+  --halo-search-widget-color-result-item-content: #fff;
+  --halo-search-widget-color-command-kbd-item: #fff;
+  --halo-search-widget-color-command-kbd-border: #fff;
+  --halo-search-widget-color-result-empty: #fff;
 }
 
 .header {
@@ -16,7 +32,6 @@ html {
 }
 
 .popular-post {
-
   &__item:last-child {
     border-bottom-width: 0;
     padding-bottom: 0;

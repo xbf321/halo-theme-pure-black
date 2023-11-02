@@ -13,5 +13,5 @@ spec:
   repo: https://github.com/xbf321/halo-theme-github
   settingName: "theme-pure-black-setting"
   configMapName: "theme-pure-black-configMap"
-  version: 1.0.0
+  version: 0.0.2
   require: 2.0.0

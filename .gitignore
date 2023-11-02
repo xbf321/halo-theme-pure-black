@@ -24,6 +24,7 @@ yarn.lock
 *.njsproj
 *.sln
 *.sw?
+templates/assets/*
 
 .gradle
 build

@@ -1,24 +1,17 @@
 <!DOCTYPE html>
-<html
-  lang="en"
-  th:fragment="html (title, head, banner, sidebar, content, footer)"
->
+<html lang="en" th:fragment="html (title, head, banner, sidebar, content, footer)">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title th:text="${title}"></title>
     <meta property="og:title" th:content="${title}">
     <meta property="og:description" th:content="${site.seo.description}">
-    <link
-      rel="stylesheet"
-      th:href="@{/assets/dist/style.css?v={version}(version=${theme.spec.version})}"
-    />
+    <style>html { background-color: rgb(13, 17, 23); color: rgb(230, 237, 243); }</style>
+    <link rel="stylesheet" th:href="@{/assets/dist/style.css?v={version}(version=${theme.spec.version})}"/>
     <th:block th:if="${head != null}">
       <th:block th:replace="${head}" />
     </th:block>
-    <script
-      th:src="@{/assets/dist/main.iife.js?v={version}(version=${theme.spec.version})}"
-    ></script>
+    <script th:src="@{/assets/dist/main.iife.js?v={version}(version=${theme.spec.version})}"></script>
   </head>
   <body>
     <th:block th:replace="~{modules/header}"></th:block>
